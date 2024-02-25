@@ -12,7 +12,8 @@ common:
 
   list-delimiter: '&7, &b'
 
-  denied: '%prefix% You do not have access to the world ''&b%world%&7''.'
+  denied:
+  - '%prefix% You do not have access to the world ''&b%world%&7''.'
 
 command:
 

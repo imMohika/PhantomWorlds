@@ -61,7 +61,7 @@ public class PlayerTeleportListener implements Listener {
     }
 
     if(plugin.worldManager.tpAwaiting.containsKey(event.getPlayer().getUniqueId())) {
-      if(!event.isCancelled()) {
+      if(event.isCancelled()) {
 
         (new MultiMessage(
                 PhantomWorlds.instance().messages.getConfig()
