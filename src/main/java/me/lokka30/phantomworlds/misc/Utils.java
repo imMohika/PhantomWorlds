@@ -358,9 +358,8 @@ public class Utils {
               ))).send(sender);
       return;
     }
-    targetPlayer.teleport(parseSpawn(world));
 
-    (new MultiMessage(
+    PhantomWorlds.worldManager().tpAwaiting.put(targetPlayer.getUniqueId(), new MultiMessage(
             PhantomWorlds.instance().messages.getConfig()
                     .getStringList("command.phantomworlds.subcommands." + subCommand + ".success"),
             Arrays.asList(
@@ -369,7 +368,9 @@ public class Utils {
                             true),
                     new MultiMessage.Placeholder("player", targetPlayer.getName(), false),
                     new MultiMessage.Placeholder("world", worldName, false)
-            ))).send(sender);
+            )));
+
+    targetPlayer.teleport(parseSpawn(world));
   }
 
   public static Location parseSpawn(final World world) {

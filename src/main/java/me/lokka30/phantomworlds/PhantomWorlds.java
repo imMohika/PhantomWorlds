@@ -134,7 +134,7 @@ public class PhantomWorlds extends JavaPlugin {
 
     if(settings.getConfig().getBoolean("backup-scheduler", true)) {
       getLogger().info("Starting up Backup scheduler...");
-      backupService = new BackupScheduler().runTaskTimerAsynchronously(this, settings.getConfig().getInt("backup-delay") * 20L, settings.getConfig().getInt("backup-delay") * 20L);
+      backupService = new BackupScheduler().runTaskTimerAsynchronously(this, settings.getConfig().getInt("backup-delay", 600) * 20L, settings.getConfig().getInt("backup-delay", 600) * 20L);
     }
 
     getLogger().info("Start-up complete (took " + timer.getDuration() + "ms)");
@@ -230,7 +230,6 @@ public class PhantomWorlds extends JavaPlugin {
     this.command = LiteBukkitFactory.builder()
             .commands(new PWCommand())
             .settings(settings -> settings
-                    .fallbackPrefix("phantomworlds")
                     .nativePermissions(false)
             )
             .argument(GameMode.class, new GamemodeParameter())

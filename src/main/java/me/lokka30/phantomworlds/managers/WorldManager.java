@@ -1,5 +1,6 @@
 package me.lokka30.phantomworlds.managers;
 
+import me.lokka30.microlib.messaging.MultiMessage;
 import me.lokka30.phantomworlds.PhantomWorlds;
 import me.lokka30.phantomworlds.misc.Utils;
 import me.lokka30.phantomworlds.misc.WorldLoadResponse;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static me.lokka30.phantomworlds.misc.Utils.zipFolder;
 
@@ -28,6 +31,8 @@ import static me.lokka30.phantomworlds.misc.Utils.zipFolder;
 public class WorldManager {
 
   public final Map<String, String> aliases = new LinkedHashMap<>();
+
+  public final Map<UUID, MultiMessage> tpAwaiting = new LinkedHashMap<>();
 
   /**
    * For all worlds listed in PW's data file, if they aren't already loaded by Bukkit, then tell

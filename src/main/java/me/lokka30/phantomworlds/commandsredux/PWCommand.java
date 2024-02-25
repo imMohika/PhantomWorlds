@@ -57,7 +57,7 @@ import java.util.List;
  * @author creatorfromhell
  * @since 2.0.5.0
  */
-@Command(name = "phantomworlds", aliases = {"pw"})
+@Command(name = "pw", aliases = {"phantomworlds"})
 public class PWCommand {
 
   @Execute(name = "backup", aliases = {"archive", "bu"})

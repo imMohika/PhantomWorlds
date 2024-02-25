@@ -17,10 +17,13 @@ package me.lokka30.phantomworlds.listeners.player;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import me.lokka30.microlib.messaging.MultiMessage;
 import me.lokka30.phantomworlds.PhantomWorlds;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
+
+import java.util.Arrays;
 
 /**
  * PlayerTeleportEvent
@@ -48,14 +51,32 @@ public class PlayerTeleportListener implements Listener {
 
     final String cfgPath = "worlds-to-load." + event.getTo().getWorld().getName();
 
-    if(PhantomWorlds.instance().data.getConfig().getBoolean(cfgPath + ".whitelist", false)
+    if(!event.getPlayer().isOp() && PhantomWorlds.instance().data.getConfig().getBoolean(cfgPath + ".whitelist", false)
             && !event.getPlayer().hasPermission("phantomworlds.world.access." + event.getTo().getWorld().getName())) {
       event.setCancelled(true);
-      return;
     }
 
     if(!event.getPlayer().isOp() && event.getPlayer().hasPermission("phantomworlds.world.deny." + event.getTo().getWorld().getName())) {
       event.setCancelled(true);
+    }
+
+    if(plugin.worldManager.tpAwaiting.containsKey(event.getPlayer().getUniqueId())) {
+      if(!event.isCancelled()) {
+
+        (new MultiMessage(
+                PhantomWorlds.instance().messages.getConfig()
+                        .getStringList("common.denied"),
+                Arrays.asList(
+                        new MultiMessage.Placeholder("prefix", PhantomWorlds.instance().messages.getConfig()
+                                .getString("common.prefix", "&b&lPhantomWorlds: &7"), true),
+                        new MultiMessage.Placeholder("world", event.getTo().getWorld().getName(), false)
+                ))).send(event.getPlayer());
+
+      } else {
+        plugin.worldManager.tpAwaiting.get(event.getPlayer().getUniqueId()).send(event.getPlayer());
+      }
+
+      plugin.worldManager.tpAwaiting.remove(event.getPlayer().getUniqueId());
     }
   }
 }

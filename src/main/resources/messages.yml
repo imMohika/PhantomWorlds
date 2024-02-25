@@ -12,6 +12,8 @@ common:
 
   list-delimiter: '&7, &b'
 
+  denied: '%prefix% You do not have access to the world ''&b%world%&7''.'
+
 command:
 
   phantomworlds:
@@ -346,5 +348,5 @@ command:
 
 # Do not touch anything here unless you know what you are doing.
 advanced:
-  file-version: 8
+  file-version: 9
   generated-with: '${project.version}'
