@@ -5,7 +5,7 @@
 # /     /    | `.__/| /    |  \__/  `._.' /   '   / |,'  \,'    `._.' /     /\__ `___,' \___.'
 
 name: 'PhantomWorlds'
-version: '2.06'
+version: '2.07'
 description: 'The Robust World Manager for Minecraft Servers'
 authors: [ 'creatorfromhell', 'lokka30' ]
 website: 'https://github.com/lokka30/PhantomWorlds'
@@ -13,12 +13,6 @@ website: 'https://github.com/lokka30/PhantomWorlds'
 main: 'me.lokka30.phantomworlds.PhantomWorlds'
 api-version: '1.13'
 load: STARTUP
-
-commands:
-  phantomworlds:
-    description: 'Create, manage or teleport to worlds.'
-    aliases: [ 'pw', 'world' ]
-    usage: '/<command>'
 
 permissions:
   phantomworlds.*:
