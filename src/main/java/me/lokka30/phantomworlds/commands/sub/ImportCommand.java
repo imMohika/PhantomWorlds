@@ -63,7 +63,7 @@ public class ImportCommand {
 
     final PhantomWorld pworld = new PhantomWorld(
             world.getName(), world.getEnvironment(), world.canGenerateStructures(), null,
-            null, world.isHardcore(), world.getSeed(), world.getWorldType(), world.getAllowMonsters(),
+            null, PhantomWorlds.compatibility().hardcore(world), world.getSeed(), world.getWorldType(), world.getAllowMonsters(),
             world.getAllowAnimals(), world.getKeepSpawnInMemory(), world.getPVP(), world.getDifficulty(), GameMode.SURVIVAL
     );
     pworld.save();

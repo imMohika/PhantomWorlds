@@ -18,6 +18,7 @@ package me.lokka30.phantomworlds.comatibility;
  */
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -57,5 +58,23 @@ public interface VersionCompatibility {
    */
   default PotionEffectType findType(final String effectType) {
     return PotionEffectType.getByKey(NamespacedKey.fromString(effectType));
+  }
+
+  /**
+   * Used to check if world is hardcore or not.
+   * @param world The world to check.
+   * @return True if hardcore, otherwise false.
+   */
+  default boolean hardcore(final World world) {
+    return world.isHardcore();
+  }
+
+  /**
+   * Used to apply the hardcore value to the world.
+   * @param world The world to apply to.
+   * @param hardcore Hardcore value to set for the world.
+   */
+  default void applyHardcore(World world, final boolean hardcore) {
+    world.setHardcore(hardcore);
   }
 }

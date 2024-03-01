@@ -121,6 +121,8 @@ public class PhantomWorld {
     world.setKeepSpawnInMemory(keepSpawnInMemory);
     world.setPVP(allowPvP);
     world.setDifficulty(difficulty);
+
+    PhantomWorlds.compatibility().applyHardcore(world, hardcore);
   }
 
   public void save() {

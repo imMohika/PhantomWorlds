@@ -18,6 +18,7 @@ package me.lokka30.phantomworlds.comatibility.impl;
  */
 
 import me.lokka30.phantomworlds.comatibility.VersionCompatibility;
+import org.bukkit.World;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -63,5 +64,28 @@ public class OneSeventeenCompatibility implements VersionCompatibility {
   @Override
   public PotionEffectType findType(String effectType) {
     return PotionEffectType.getByName(effectType);
+  }
+
+  /**
+   * Used to check if world is hardcore or not.
+   *
+   * @param world The world to check.
+   *
+   * @return True if hardcore, otherwise false.
+   */
+  @Override
+  public boolean hardcore(World world) {
+    return false;
+  }
+
+  /**
+   * Used to apply the hardcore value to the world.
+   *
+   * @param world    The world to apply to.
+   * @param hardcore Hardcore value to set for the world.
+   */
+  @Override
+  public void applyHardcore(World world, boolean hardcore) {
+    //do nothing, not applicable to these versions.
   }
 }
