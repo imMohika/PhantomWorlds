@@ -81,7 +81,7 @@ public class PlayerChangeWorldListener implements Listener {
         final int duration = PhantomWorlds.instance().data.getConfig().getInt(cfgPath + ".effects." + effName + ".duration", -1);
         final int amplifier = PhantomWorlds.instance().data.getConfig().getInt(cfgPath + ".effects." + effName + ".amplifier", 1);
 
-        final PotionEffectType type = PotionEffectType.getByKey(NamespacedKey.fromString(effName));
+        final PotionEffectType type = PhantomWorlds.compatibility().findType(effName);
         if(type != null) {
           final PotionEffect effect = new PotionEffect(type, duration, amplifier);
           event.getPlayer().addPotionEffect(effect);

@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static me.lokka30.phantomworlds.misc.Utils.zipFolder;
 
@@ -154,13 +153,6 @@ public class WorldManager {
                     PhantomWorlds.instance().data.getConfig().getString(cfgPath + "gameMode", "SURVIVAL")
             )
     );
-
-    if(PhantomWorlds.instance().data.getConfig().contains(cfgPath + "rules") &&
-            PhantomWorlds.instance().data.getConfig().isConfigurationSection(cfgPath + "rules")) {
-      for(final String rule : PhantomWorlds.instance().data.getConfig().getConfigurationSection(cfgPath + "rules").getKeys(false)) {
-        world.getGamerules().put(rule, PhantomWorlds.instance().data.getConfig().getString(cfgPath + "rules." + rule));
-      }
-    }
     return world;
   }
 

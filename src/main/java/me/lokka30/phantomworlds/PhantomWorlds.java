@@ -6,14 +6,17 @@ import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
 import me.lokka30.microlib.files.YamlConfigFile;
 import me.lokka30.microlib.maths.QuickTimer;
 import me.lokka30.microlib.other.UpdateChecker;
-import me.lokka30.phantomworlds.commandsredux.PWCommand;
-import me.lokka30.phantomworlds.commandsredux.params.AliasWorldParameter;
-import me.lokka30.phantomworlds.commandsredux.params.GamemodeParameter;
-import me.lokka30.phantomworlds.commandsredux.params.PortalParameter;
-import me.lokka30.phantomworlds.commandsredux.params.PotionEffectParameter;
-import me.lokka30.phantomworlds.commandsredux.params.SettingParameter;
-import me.lokka30.phantomworlds.commandsredux.params.WorldFolderParameter;
-import me.lokka30.phantomworlds.commandsredux.utils.WorldFolder;
+import me.lokka30.phantomworlds.comatibility.VersionCompatibility;
+import me.lokka30.phantomworlds.comatibility.impl.OneSeventeenCompatibility;
+import me.lokka30.phantomworlds.comatibility.impl.OneTwentyCompatibility;
+import me.lokka30.phantomworlds.commands.PWCommand;
+import me.lokka30.phantomworlds.commands.params.AliasWorldParameter;
+import me.lokka30.phantomworlds.commands.params.GamemodeParameter;
+import me.lokka30.phantomworlds.commands.params.PortalParameter;
+import me.lokka30.phantomworlds.commands.params.PotionEffectParameter;
+import me.lokka30.phantomworlds.commands.params.SettingParameter;
+import me.lokka30.phantomworlds.commands.params.WorldFolderParameter;
+import me.lokka30.phantomworlds.commands.utils.WorldFolder;
 import me.lokka30.phantomworlds.listeners.player.PlayerChangeWorldListener;
 import me.lokka30.phantomworlds.listeners.player.PlayerDeathListener;
 import me.lokka30.phantomworlds.listeners.player.PlayerJoinListener;
@@ -24,8 +27,10 @@ import me.lokka30.phantomworlds.managers.FileManager;
 import me.lokka30.phantomworlds.managers.WorldManager;
 import me.lokka30.phantomworlds.misc.CompatibilityChecker;
 import me.lokka30.phantomworlds.misc.UpdateCheckerResult;
+import me.lokka30.phantomworlds.misc.Utils;
 import me.lokka30.phantomworlds.scheduler.BackupScheduler;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.PortalType;
 import org.bukkit.World;
@@ -62,6 +67,8 @@ public class PhantomWorlds extends JavaPlugin {
 
 
   private static PhantomWorlds instance;
+
+  private static VersionCompatibility compatibility;
 
   protected LiteCommands<?> command;
 
@@ -125,6 +132,13 @@ public class PhantomWorlds extends JavaPlugin {
     createTabs.addAll(generateCreateSuggestions());
 
     QuickTimer timer = new QuickTimer(TimeUnit.MILLISECONDS);
+
+    final String bukkitVersion = Bukkit.getServer().getBukkitVersion();
+    if(Utils.isOneSeventeen(bukkitVersion)) {
+      compatibility = new OneSeventeenCompatibility();
+    } else {
+      compatibility = new OneTwentyCompatibility();
+    }
     checkCompatibility();
     loadFiles();
 
@@ -310,6 +324,10 @@ public class PhantomWorlds extends JavaPlugin {
 
   public static WorldManager worldManager() {
     return instance.worldManager;
+  }
+
+  public static VersionCompatibility compatibility() {
+    return compatibility;
   }
 
   private ArrayList<String> generateCreateSuggestions() {

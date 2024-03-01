@@ -415,4 +415,11 @@ public class Utils {
       return "world";
     }
   }
+
+  public static boolean isOneSeventeen(final String version) {
+    return version.contains("1.17") || version.contains("1.7") || version.contains("1.8") ||
+            version.contains("1.9") || version.contains("1.10") || version.contains("1.11") ||
+            version.contains("1.12") || version.contains("1.13") || version.contains("1.14") ||
+            version.contains("1.15") || version.contains("1.16");
+  }
 }

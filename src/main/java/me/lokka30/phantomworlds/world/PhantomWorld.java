@@ -20,7 +20,6 @@ package me.lokka30.phantomworlds.world;
 import me.lokka30.phantomworlds.PhantomWorlds;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
-import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
@@ -28,8 +27,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * PhantomWorld object to make it easier to work with PW-managed worlds.
@@ -38,8 +35,6 @@ import java.util.Map;
  * @since v2.0.0
  */
 public class PhantomWorld {
-
-  private final Map<String, String> gamerules = new HashMap<>();
 
   private final String name;
   private final World.Environment environment;
@@ -126,25 +121,6 @@ public class PhantomWorld {
     world.setKeepSpawnInMemory(keepSpawnInMemory);
     world.setPVP(allowPvP);
     world.setDifficulty(difficulty);
-
-    for(Map.Entry<String, String> entry : gamerules.entrySet()) {
-      final GameRule<?> rule = GameRule.getByName(entry.getKey());
-      if(rule == null) continue;
-
-      if(rule.getType() == Boolean.class) {
-        try {
-          world.setGameRule((GameRule<Boolean>)rule, Boolean.valueOf(entry.getValue()));
-        } catch(Exception ignore) {
-          PhantomWorlds.logger().warning("Error setting gamerule: " + entry.getKey() + " for world: " + name + "! Invalid boolean value!");
-        }
-      } else if(rule.getType() == Integer.class) {
-        try {
-          world.setGameRule((GameRule<Integer>)rule, Integer.valueOf(entry.getValue()));
-        } catch(Exception ignore) {
-          PhantomWorlds.logger().warning("Error setting gamerule: " + entry.getKey() + " for world: " + name + "! Invalid integer value!");
-        }
-      }
-    }
   }
 
   public void save() {
@@ -169,14 +145,6 @@ public class PhantomWorld {
     } catch(final IOException ex) {
       throw new RuntimeException(ex);
     }
-  }
-
-  public void loadGameRules() {
-
-  }
-
-  public Map<String, String> getGamerules() {
-    return gamerules;
   }
 
   public String name() {
