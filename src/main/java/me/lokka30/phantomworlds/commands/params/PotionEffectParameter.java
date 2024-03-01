@@ -42,8 +42,6 @@ public class PotionEffectParameter extends ArgumentResolver<CommandSender, Strin
 
   static {
 
-    System.out.println("Null Check: " + (PhantomWorlds.compatibility() == null));
-
     POTION_EFFECTS.addAll(PhantomWorlds.compatibility().potionEffectSuggestions());
   }
 

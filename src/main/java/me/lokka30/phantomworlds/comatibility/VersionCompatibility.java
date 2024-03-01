@@ -19,6 +19,7 @@ package me.lokka30.phantomworlds.comatibility;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;

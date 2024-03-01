@@ -40,7 +40,7 @@ public class PlayerTeleportListener implements Listener {
   }
 
   @EventHandler
-  public void onPortal(PlayerTeleportEvent event) {
+  public void onTP(PlayerTeleportEvent event) {
     if(event.getTo() == null || event.getTo().getWorld() == null || event.getFrom().getWorld() == null) {
       return;
     }

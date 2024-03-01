@@ -88,7 +88,7 @@ public class SetSpawnCommand {
       //PhantomWorlds doesn't manage the spawn here so let Mojang deal with it.
       try {
         finalWorld.setSpawnLocation(new Location(finalWorld, finalX, finalY, finalZ, finalYaw, finalPitch));
-      } catch(NoSuchMethodError err) {
+      } catch(NoSuchMethodError ignore) {
         //This is dumb that the setSpawn method in spigot uses integers... great design.
         finalWorld.setSpawnLocation((int)finalX, (int)finalY, (int)finalZ);
         // 1.8 doesn't let us set pitch and yaw ... yawn

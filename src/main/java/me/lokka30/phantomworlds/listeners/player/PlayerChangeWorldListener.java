@@ -20,7 +20,6 @@ package me.lokka30.phantomworlds.listeners.player;
 import me.lokka30.phantomworlds.PhantomWorlds;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
@@ -67,7 +66,7 @@ public class PlayerChangeWorldListener implements Listener {
             PhantomWorlds.instance().data.getConfig().isConfigurationSection(cfgPrevPath + ".effects")) {
       for(final String effName : PhantomWorlds.instance().data.getConfig().getConfigurationSection(cfgPrevPath + ".effects").getKeys(false)) {
 
-        final PotionEffectType type = PotionEffectType.getByKey(NamespacedKey.fromString(effName));
+        final PotionEffectType type = PhantomWorlds.compatibility().findType(effName);
         if(type != null) {
           event.getPlayer().removePotionEffect(type);
         }
