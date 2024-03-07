@@ -49,7 +49,7 @@ public class PlayerJoinListener implements Listener {
     }
 
     //We don't manage so send the player to the spawn world
-    if(!event.getPlayer().hasPlayedBefore()) {
+    if(!event.getPlayer().hasPlayedBefore() && PhantomWorlds.instance().settings.getConfig().getBoolean("spawning.default-first", true)) {
       event.getPlayer().teleport(Utils.parseSpawn(sWorld));
     }
   }
