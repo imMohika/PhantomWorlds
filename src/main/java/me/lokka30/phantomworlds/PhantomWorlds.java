@@ -26,6 +26,7 @@ import me.lokka30.phantomworlds.listeners.world.WorldInitListener;
 import me.lokka30.phantomworlds.managers.FileManager;
 import me.lokka30.phantomworlds.managers.WorldManager;
 import me.lokka30.phantomworlds.misc.CompatibilityChecker;
+import me.lokka30.phantomworlds.misc.PAPIHook;
 import me.lokka30.phantomworlds.misc.UpdateCheckerResult;
 import me.lokka30.phantomworlds.misc.Utils;
 import me.lokka30.phantomworlds.scheduler.BackupScheduler;
@@ -128,6 +129,12 @@ public class PhantomWorlds extends JavaPlugin {
   public void onEnable() {
 
     instance = this;
+
+    if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+      new PAPIHook().register();
+    } else {
+
+    }
 
     createTabs.addAll(generateCreateSuggestions());
 
