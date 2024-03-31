@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 public class PAPIHook extends PlaceholderExpansion {
   @Override
   public @NotNull String getIdentifier() {
-    return "pw";
+    return "pworlds";
   }
 
   @Override

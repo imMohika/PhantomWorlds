@@ -24,9 +24,29 @@ package me.lokka30.phantomworlds.misc;
  * @since 2.0.5.0
  */
 public enum WorldLoadResponse {
+
+  /**
+   * Success: World load response.
+   */
   LOADED,
+
+  /**
+   * Failure: World not found.
+   */
   NOT_FOUND,
+
+  /**
+   * Failure: Already loaded.
+   */
   ALREADY_LOADED,
+
+  /**
+   * Failure: Invalid world.
+   */
   INVALID,
+
+  /**
+   * Failure: Marked as skipped in data.yml
+   */
   CONFIG_SKIPPED
 }

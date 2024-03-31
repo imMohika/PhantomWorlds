@@ -91,7 +91,7 @@ public class WorldManager {
   public WorldLoadResponse loadWorld(final String worldName) {
 
     if(Bukkit.getWorld(worldName) != null) {
-      return WorldLoadResponse.NOT_FOUND;
+      return WorldLoadResponse.ALREADY_LOADED;
     }
 
     final File worldFolder = new File(Bukkit.getWorldContainer(), worldName);
