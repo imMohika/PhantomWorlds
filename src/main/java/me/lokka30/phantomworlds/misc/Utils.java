@@ -422,4 +422,8 @@ public class Utils {
             version.contains("1.12") || version.contains("1.13") || version.contains("1.14") ||
             version.contains("1.15") || version.contains("1.16");
   }
+
+  public static boolean isTwentyFive(final String version) {
+    return version.contains("1.20.5");
+  }
 }

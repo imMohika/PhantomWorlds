@@ -41,6 +41,7 @@ import me.lokka30.phantomworlds.commands.sub.UnloadCommand;
 import me.lokka30.phantomworlds.commands.sub.set.SetEffectsCommand;
 import me.lokka30.phantomworlds.commands.sub.set.SetGamemodeCommand;
 import me.lokka30.phantomworlds.commands.sub.set.SetPortalCommand;
+import me.lokka30.phantomworlds.commands.sub.set.SetTransferCommand;
 import me.lokka30.phantomworlds.commands.sub.set.SetWhitelistCommand;
 import me.lokka30.phantomworlds.commands.utils.WorldFolder;
 import org.bukkit.GameMode;
@@ -149,6 +150,13 @@ public class PWCommand {
   @Description("command.phantomworlds.help.setportal")
   public void setPortal(@Context CommandSender commandSender, @Arg("world") World world, @Arg("portal type") PortalType portal, @Arg("world to") World worldTo) {
     SetPortalCommand.onCommand(commandSender, world, portal, worldTo);
+  }
+
+  @Execute(name = "set transfer")
+  @Permission("phantomworlds.command.phantomworlds.set.transfer")
+  @Description("command.phantomworlds.help.settransfer")
+  public void setPortal(@Context CommandSender commandSender, @Arg("world") World world, @Arg("portal type") PortalType portal, @Arg("ip:port") String ip) {
+    SetTransferCommand.onCommand(commandSender, world, portal, ip);
   }
 
   @Execute(name = "set whitelist")

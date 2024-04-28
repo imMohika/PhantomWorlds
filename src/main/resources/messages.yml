@@ -15,6 +15,9 @@ common:
   denied:
   - '%prefix% You do not have access to the world ''&b%world%&7''.'
 
+  invalidtransfer:
+  - '%prefix% Server has improperly configured world transfer settings!'
+
 command:
 
   phantomworlds:
@@ -29,6 +32,7 @@ command:
       - '&8 &m->&b /%label% set effects <world> [effects] &8- &7set the potion effects to be applied to players in this world.'
       - '&8 &m->&b /%label% set gamemode <world> <gamemode> &8- &7set the gamemode for this world.'
       - '&8 &m->&b /%label% set portal <world> <portal type> <world to> &8- &7set where the specified portal type takes players in this world.'
+      - '&8 &m->&b /%label% set transfer <world> <portal type> <ip:port> &8- &7set the server where the specified portal type takes players in this world.'
       - '&8 &m->&b /%label% set whitelist <world> <whitelist(true/false)> &8- &7set whether there is a whitelist for this world or not.'
       - '&8 &m->&b /%label% setspawn &8- &7set the spawnpoint of a world'
       - '&8 &m->&b /%label% delete &8- &7delete a world'
@@ -51,6 +55,7 @@ command:
       seteffects: '&b/pw set effects <world> [effects] &8- &7set the potion effects to be applied to players in this world.'
       setgamemode: '&b/pw set gamemode <world> <gamemode> &8- &7set the gamemode for this world.'
       setportal: '&b/pw set portal <world> <portal type> <world to> &8- &7set where the specified portal type takes players in this world.'
+      settransfer: '&b/pw set transfer <world> <portal type> <ip:port> &8- &7set the server where the specified portal type takes players in this world.'
       setwhitelist: '&b/pw set whitelist <world> <whitelist(true/false)> &8- &7set whether there is a whitelist for this world or not.'
       setspawn: '&b/pw setspawn [x] [y] [z] [world] [yaw] [pitch] &8- &7set the spawnpoint of a world'
       delete: '&b/pw delete <world> &8- &7delete a world'
@@ -266,6 +271,14 @@ command:
         success:
           - '%prefix% Successfully set the portal destination for portal ''&b%portal%&7'' of world ''&b%world%&7'' to world ''&b%world_to%&7''.'
 
+      settransfer:
+
+        usage:
+          - '%prefix% Invalid usage, try ''&b/%label% set transfer <world> <portal type> <ip:port> &8- &7''.'
+
+        success:
+          - '%prefix% Successfully set the server destination for portal ''&b%portal%&7'' of world ''&b%world%&7'' to world ''&b%transfer%&7''.'
+
       setwhitelist:
 
         usage:
@@ -349,5 +362,5 @@ command:
 
 # Do not touch anything here unless you know what you are doing.
 advanced:
-  file-version: 9
+  file-version: 10
   generated-with: '${project.version}'
