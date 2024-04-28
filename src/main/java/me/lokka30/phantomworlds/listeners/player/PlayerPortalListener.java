@@ -71,18 +71,10 @@ public class PlayerPortalListener implements Listener {
     final String transferConfig = (end)? ".endtransfer" : ".nethertransfer";
 
     if(PhantomWorlds.instance().data.getConfig().contains(cfgPath + transferConfig)) {
-      event.setCancelled(true);
       final String to = PhantomWorlds.instance().data.getConfig().getString(cfgPath + transferConfig);
 
       if(to == null) {
         plugin.getLogger().warning("Configured transfer host doesn't exist!");
-        (new MultiMessage(
-                PhantomWorlds.instance().messages.getConfig()
-                        .getStringList("common.invalidtransfer"), Arrays.asList(
-                new MultiMessage.Placeholder("prefix",
-                        PhantomWorlds.instance().messages.getConfig().getString("common.prefix", "&b&lPhantomWorlds: &7"),
-                        true)
-        ))).send(event.getPlayer());
         return;
       }
 
@@ -91,6 +83,7 @@ public class PlayerPortalListener implements Listener {
       final int port = (details.length >= 2)? Integer.parseInt(details[1]) : 25565;
 
       try {
+        event.setCancelled(true);
         event.getPlayer().transfer(details[0], port);
       } catch(NoSuchMethodError ignore) {
         (new MultiMessage(
