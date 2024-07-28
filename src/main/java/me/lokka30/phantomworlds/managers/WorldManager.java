@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -59,7 +60,9 @@ public class WorldManager {
     //noinspection ConstantConditions
     for(final String worldName : PhantomWorlds.instance().data.getConfig().getConfigurationSection("worlds-to-load").getKeys(false)) {
 
-      if(worldName.equalsIgnoreCase(defaultWorld) || worldName.startsWith(defaultWorld)) {
+      if(worldName.equalsIgnoreCase(defaultWorld)
+              || worldName.startsWith(defaultWorld) && worldName.toLowerCase(Locale.ROOT).contains("nether")
+              || worldName.startsWith(defaultWorld) && worldName.toLowerCase(Locale.ROOT).contains("end")) {
         continue;
       }
 
