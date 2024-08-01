@@ -1,5 +1,6 @@
 package me.lokka30.phantomworlds;
 
+import com.tcoded.folialib.FoliaLib;
 import dev.rollczi.litecommands.LiteCommands;
 import dev.rollczi.litecommands.argument.ArgumentKey;
 import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
@@ -10,6 +11,7 @@ import me.lokka30.phantomworlds.comatibility.VersionCompatibility;
 import me.lokka30.phantomworlds.comatibility.impl.OneSeventeenCompatibility;
 import me.lokka30.phantomworlds.comatibility.impl.OneTwentyCompatibility;
 import me.lokka30.phantomworlds.commands.PWCommand;
+import me.lokka30.phantomworlds.commands.handler.PWInvalidUsageHandler;
 import me.lokka30.phantomworlds.commands.params.AliasWorldParameter;
 import me.lokka30.phantomworlds.commands.params.GamemodeParameter;
 import me.lokka30.phantomworlds.commands.params.PortalParameter;
@@ -73,6 +75,7 @@ public class PhantomWorlds extends JavaPlugin {
   private static VersionCompatibility compatibility;
 
   protected LiteCommands<?> command;
+  protected FoliaLib folia;
 
   private BukkitTask backupService = null;
 
@@ -137,7 +140,6 @@ public class PhantomWorlds extends JavaPlugin {
     } else {
       getServer().getPluginManager().registerEvents(new PluginEnableListener(), this);
     }
-
     createTabs.addAll(generateCreateSuggestions());
 
     QuickTimer timer = new QuickTimer(TimeUnit.MILLISECONDS);
@@ -255,6 +257,7 @@ public class PhantomWorlds extends JavaPlugin {
             .settings(settings -> settings
                     .nativePermissions(false)
             )
+            .invalidUsage(new PWInvalidUsageHandler())
             .argument(GameMode.class, new GamemodeParameter())
             .argument(PortalType.class, new PortalParameter())
             .argument(String.class, ArgumentKey.of("world-setting"), new SettingParameter())
@@ -385,5 +388,9 @@ public class PhantomWorlds extends JavaPlugin {
     list.add(option + "false");
 
     return list;
+  }
+
+  public FoliaLib folia() {
+    return folia;
   }
 }

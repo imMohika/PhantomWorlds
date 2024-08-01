@@ -3,6 +3,7 @@ package me.lokka30.phantomworlds.managers;
 import me.lokka30.microlib.messaging.MultiMessage;
 import me.lokka30.phantomworlds.PhantomWorlds;
 import me.lokka30.phantomworlds.misc.Utils;
+import me.lokka30.phantomworlds.misc.WorldCopyResponse;
 import me.lokka30.phantomworlds.misc.WorldLoadResponse;
 import me.lokka30.phantomworlds.world.PhantomWorld;
 import org.bukkit.Bukkit;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -115,6 +117,35 @@ public class WorldManager {
     PhantomWorlds.logger().info("Loading world '" + worldName + "'...");
     getPhantomWorldFromData(worldName).create();
     return WorldLoadResponse.LOADED;
+  }
+
+  public WorldCopyResponse copyWorld(final String worldName, final String newWorldName) {
+    final World world = Bukkit.getWorld(worldName);
+    if(world == null) {
+      return WorldCopyResponse.INVALID;
+    }
+
+    final File worldFolder = new File(Bukkit.getWorldContainer(), worldName);
+    final File newWorldFolder = new File(Bukkit.getWorldContainer(), newWorldName);
+
+    try {
+
+      if(!Utils.copyFolder(worldFolder.toPath(), newWorldFolder.toPath())) {
+        return WorldCopyResponse.INVALID;
+      }
+      final PhantomWorld pworld = new PhantomWorld(
+              newWorldName, world.getEnvironment(), world.canGenerateStructures(), null,
+              null, PhantomWorlds.compatibility().hardcore(world), world.getSeed(), world.getWorldType(), world.getAllowMonsters(),
+              world.getAllowAnimals(), world.getKeepSpawnInMemory(), world.getPVP(), world.getDifficulty(), GameMode.SURVIVAL
+      );
+      pworld.save();
+      loadWorld(newWorldName);
+
+    } catch(Exception ignore) {
+      return WorldCopyResponse.INVALID;
+    }
+
+    return WorldCopyResponse.COPIED;
   }
 
   /**

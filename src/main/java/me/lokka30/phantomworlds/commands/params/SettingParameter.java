@@ -35,6 +35,9 @@ import org.bukkit.command.CommandSender;
 public class SettingParameter extends ArgumentResolver<CommandSender, String> {
   @Override
   protected ParseResult<String> parse(Invocation<CommandSender> invocation, Argument<String> context, String argument) {
+    if(argument.isEmpty()) {
+      return ParseResult.failure("Invalid effect argument.");
+    }
     return ParseResult.success(argument);
   }
 

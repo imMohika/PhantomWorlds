@@ -55,7 +55,7 @@ public class WorldFolderParameter extends ArgumentResolver<CommandSender, WorldF
     final File directory = Bukkit.getWorldContainer();
 
     if(directory.exists()) {
-      for(File file : directory.listFiles()) {
+      for(final File file : directory.listFiles()) {
         final File levelDat = new File(file, "level.dat");
         if(file.isDirectory() && levelDat.exists()) {
           folders.add(file.getName());

@@ -26,6 +26,7 @@ import dev.rollczi.litecommands.annotations.optional.OptionalArg;
 import dev.rollczi.litecommands.annotations.permission.Permission;
 import me.lokka30.phantomworlds.commands.sub.BackupCommand;
 import me.lokka30.phantomworlds.commands.sub.CompatibilityCommand;
+import me.lokka30.phantomworlds.commands.sub.CopyCommand;
 import me.lokka30.phantomworlds.commands.sub.CreateCommand;
 import me.lokka30.phantomworlds.commands.sub.DebugCommand;
 import me.lokka30.phantomworlds.commands.sub.DeleteCommand;
@@ -73,6 +74,13 @@ public class PWCommand {
   @Description("command.phantomworlds.help.create")
   public void create(@Context CommandSender commandSender, @Arg("world name") final String name, @Arg("environment")World.Environment environment, @Arg("world-setting") List<String> settings) {
     CreateCommand.onCommand(commandSender, name, environment, settings);
+  }
+
+  @Execute(name = "copy")
+  @Permission("phantomworlds.command.phantomworlds.copy")
+  @Description("command.phantomworlds.help.copy")
+  public void copy(@Context CommandSender commandSender, @Arg("world name") final String newWorld, @OptionalArg("world folder") final WorldFolder world) {
+    CopyCommand.onCommand(commandSender, newWorld, world);
   }
 
   @Execute(name = "compatibility")

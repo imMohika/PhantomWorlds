@@ -47,6 +47,10 @@ public class PotionEffectParameter extends ArgumentResolver<CommandSender, Strin
 
   @Override
   protected ParseResult<String> parse(Invocation<CommandSender> invocation, Argument<String> context, String argument) {
+    if(argument.isEmpty()) {
+      return ParseResult.failure("Invalid effect argument.");
+    }
+
     return ParseResult.success(argument);
   }
 

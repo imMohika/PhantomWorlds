@@ -22,6 +22,7 @@ import dev.rollczi.litecommands.invalidusage.InvalidUsage;
 import dev.rollczi.litecommands.invalidusage.InvalidUsageHandler;
 import dev.rollczi.litecommands.invocation.Invocation;
 import dev.rollczi.litecommands.schematic.Schematic;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -37,5 +38,18 @@ public class PWInvalidUsageHandler implements InvalidUsageHandler<CommandSender>
     final CommandSender sender = invocation.sender();
     final Schematic schematic = result.getSchematic();
 
+    if (schematic.isOnlyFirst()) {
+      sender.sendMessage(color("&cInvalid usage of command! &7(" + schematic.first() + ")"));
+      return;
+    }
+
+    sender.sendMessage(color("&cInvalid usage of command!"));
+    for (String scheme : schematic.all()) {
+      sender.sendMessage(color("&8 - &7" + scheme));
+    }
+  }
+
+  private String color(final String message) {
+    return ChatColor.translateAlternateColorCodes('&', message);
   }
 }

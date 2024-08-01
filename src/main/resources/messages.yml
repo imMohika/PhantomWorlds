@@ -25,6 +25,7 @@ command:
     usage:
       - '%prefix% Available commands:'
       - '&8 &m->&b /%label% create &8- &7create a world'
+      - '&8 &m->&b /%label% copy <new world> <world> &8- &7copy a world'
       - '&8 &m->&b /%label% import &8- &7import a world'
       - '&8 &m->&b /%label% list &8- &7list loaded worlds'
       - '&8 &m->&b /%label% teleport &8- &7teleport to a loaded world''s spawnpoint'
@@ -47,6 +48,7 @@ command:
 
     help:
       create: '&b/pw create <world> <environment> [options...] &8- &7create a world'
+      copy: '&b/pw copy <new world> <world> &8- &7copy a world'
       import: '&b/pw import <world> &8- &7import a world'
       list: '&b/pw list &8- &7list worlds'
       tp: '&b/pw teleport <world> [player] &8- &7teleport to a loaded world''s spawnpoint'
@@ -153,6 +155,20 @@ command:
 
         usage:
           - '%prefix% Invalid usage, try ''&b/%label% create <world> <environment> [options...]&7''.'
+
+      copy:
+
+        success:
+          - '%prefix%: &7Successfully copied the world %world% to the world %new_world%'
+
+        usage:
+          - '%prefix% Invalid usage, try ''&b/%label% copy <new world> <world>&7''.'
+
+        failure-loading:
+          - '%prefix% Issue while loading the new world ''&b%world%&7''.'
+
+        failure-copying:
+          - '%prefix% Issue while copying the new world ''&b%world%&7''.'
 
       debug:
 
@@ -362,5 +378,5 @@ command:
 
 # Do not touch anything here unless you know what you are doing.
 advanced:
-  file-version: 10
+  file-version: 11
   generated-with: '${project.version}'

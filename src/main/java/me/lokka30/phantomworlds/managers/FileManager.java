@@ -161,7 +161,7 @@ public class FileManager {
   public enum PWFile {
     SETTINGS(3),
     ADVANCED_SETTINGS(1),
-    MESSAGES(10),
+    MESSAGES(11),
     DATA(2);
 
     public final int latestFileVersion; // If == -1: 'do not migrate me!'

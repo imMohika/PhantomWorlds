@@ -17,7 +17,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileSystemException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -57,6 +61,39 @@ public class Utils {
     final HashSet<String> loadedWorlds = new HashSet<>();
     Bukkit.getWorlds().forEach(world->loadedWorlds.add(world.getName()));
     return loadedWorlds;
+  }
+
+  public static boolean copyFolder(final Path source, final Path target) throws IOException {
+    if(!Files.exists(source) || !Files.isDirectory(source)) {
+      return false;
+    }
+
+    // Create the target directory if it doesn't exist
+    if(!Files.exists(target)) {
+      Files.createDirectories(target);
+    }
+
+    // Walk the file tree from the source directory and copy each file/folder
+    try(Stream<Path> pathStream = Files.walk(source)) {
+
+      pathStream.forEach(sourcePath -> {
+        final Path targetPath = target.resolve(source.relativize(sourcePath));
+        try {
+
+          if(!targetPath.toString().toLowerCase(Locale.ROOT).contains("uid.dat")
+                  && !targetPath.toString().toLowerCase(Locale.ROOT).contains("session.lock")) {
+
+            Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+          }
+        } catch(FileSystemException ignore) {
+          //session.lock is lame
+        } catch (IOException e) {
+
+          throw new RuntimeException("Failed to copy file: " + sourcePath, e);
+        }
+      });
+    }
+    return true;
   }
 
   /**

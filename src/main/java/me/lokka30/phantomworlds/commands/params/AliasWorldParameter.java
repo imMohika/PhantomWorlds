@@ -40,7 +40,13 @@ import java.util.List;
 public class AliasWorldParameter extends ArgumentResolver<CommandSender, World> {
   @Override
   protected ParseResult<World> parse(Invocation<CommandSender> invocation, Argument<World> context, String argument) {
-    return ParseResult.success(PhantomWorlds.worldManager().findWorld(argument));
+
+    final World world = PhantomWorlds.worldManager().findWorld(argument);
+    if(world == null) {
+      return ParseResult.failure("Invalid world name");
+    }
+
+    return ParseResult.success(world);
   }
 
   @Override
