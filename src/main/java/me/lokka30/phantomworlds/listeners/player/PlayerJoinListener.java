@@ -41,6 +41,9 @@ public class PlayerJoinListener implements Listener {
 
   @EventHandler
   public void onJoin(PlayerJoinEvent event) {
+    if (!PhantomWorlds.instance().settings.getConfig().getBoolean("spawning.enabled", false)) {
+      return;
+    }
     final String spawnWorld = PhantomWorlds.instance().settings.getConfig().getString("spawning.default-world", "world");
     final World sWorld = Bukkit.getWorld(spawnWorld);
     if(sWorld == null) {
@@ -49,7 +52,7 @@ public class PlayerJoinListener implements Listener {
     }
 
     //We don't manage so send the player to the spawn world
-    if(!event.getPlayer().hasPlayedBefore() && PhantomWorlds.instance().settings.getConfig().getBoolean("spawning.default-first", true)) {
+    if(!event.getPlayer().hasPlayedBefore() && PhantomWorlds.instance().settings.getConfig().getBoolean("spawning.enabled", false) && PhantomWorlds.instance().settings.getConfig().getBoolean("spawning.default-first", true)) {
       event.getPlayer().teleport(Utils.parseSpawn(sWorld));
     }
   }

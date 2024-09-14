@@ -39,6 +39,10 @@ public class PlayerDeathListener implements Listener {
 
   @EventHandler
   public void onDeath(PlayerDeathEvent event) {
+    if (!PhantomWorlds.instance().settings.getConfig().getBoolean("spawning.enabled", false)) {
+      return;
+    }
+
     if(!PhantomWorlds.instance().settings.getConfig().getBoolean("spawning.respawn-world", false)) {
       return;
     }

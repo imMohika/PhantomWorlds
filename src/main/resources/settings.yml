@@ -9,6 +9,7 @@ run-update-checker: true
 
 #Configurations relating to spawn controls.
 spawning:
+  enabled: false
 
   #What is the spawn world for the server? If the player hasn't played before this is the world that
   #they will go to.
