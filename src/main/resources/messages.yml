@@ -13,10 +13,10 @@ common:
   list-delimiter: '&7, &b'
 
   denied:
-  - '%prefix% You do not have access to the world ''&b%world%&7''.'
+    - '%prefix% You do not have access to the world ''&b%world%&7''.'
 
   invalidtransfer:
-  - '%prefix% Server has improperly configured world transfer settings!'
+    - '%prefix% Server has improperly configured world transfer settings!'
 
 command:
 
@@ -64,6 +64,7 @@ command:
       backup: '&b/pw backup <world> &8- &7backup a world'
       unload: '&b/pw unload <world> &8- &7unload a loaded world'
       load: '&b/pw load <world> &8- &7load an unloaded world'
+      loadall: '&b/pw loadall> &8- &7load all unloaded worlds'
       reload: '&b/pw reload &8- &7reload all config & data files'
       info: '&b/pw info &8- &7view info about the plugin'
       compatibility: '&b/pw compatibility &8- &7check for incompatibilities'
@@ -231,6 +232,10 @@ command:
 
         failure-loading:
           - '%prefix% Unknown issue while loading the world.'
+
+      loadall:
+        finished:
+          - '%prefix% Finished loading &b%size% worlds.'
 
       list:
 

@@ -20,14 +20,10 @@ package me.lokka30.phantomworlds.commands.sub;
 import me.lokka30.microlib.messaging.MultiMessage;
 import me.lokka30.phantomworlds.PhantomWorlds;
 import me.lokka30.phantomworlds.commands.utils.WorldFolder;
-import me.lokka30.phantomworlds.misc.WorldLoadResponse;
+import me.lokka30.phantomworlds.misc.Utils;
 import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
-
-import static me.lokka30.phantomworlds.misc.WorldLoadResponse.ALREADY_LOADED;
-import static me.lokka30.phantomworlds.misc.WorldLoadResponse.INVALID;
-import static me.lokka30.phantomworlds.misc.WorldLoadResponse.LOADED;
 
 /**
  * LoadCommand
@@ -37,69 +33,20 @@ import static me.lokka30.phantomworlds.misc.WorldLoadResponse.LOADED;
  */
 public class LoadCommand {
 
-  public static void onCommand(final CommandSender sender, final WorldFolder world) {
+    public static void onCommand(final CommandSender sender, final WorldFolder world) {
 
-    if(world == null || world.getFolder() == null) {
-      (new MultiMessage(
-              PhantomWorlds.instance().messages.getConfig()
-                      .getStringList("command.phantomworlds.usages.load"), Arrays.asList(
-              new MultiMessage.Placeholder("prefix",
-                      PhantomWorlds.instance().messages.getConfig().getString("common.prefix", "&b&lPhantomWorlds: &7"),
-                      true),
-              new MultiMessage.Placeholder("label", "pw", false)
-      ))).send(sender);
-      return;
-    }
-
-    final WorldLoadResponse response = PhantomWorlds.worldManager().loadWorld(world.getFolder());
-
-    if(response == ALREADY_LOADED) {
-      (new MultiMessage(
-              PhantomWorlds.instance().messages.getConfig()
-                      .getStringList("command.phantomworlds.subcommands.create.already-loaded"),
-              Arrays.asList(
-                      new MultiMessage.Placeholder("prefix", PhantomWorlds.instance().messages.getConfig()
-                              .getString("common.prefix", "&b&lPhantomWorlds: &7"), true),
-                      new MultiMessage.Placeholder("world", world.getFolder(), false),
-                      new MultiMessage.Placeholder("label", "pw", false)
-              ))).send(sender);
-      return;
-    }
-
-    if(response == INVALID) {
-      (new MultiMessage(
-              PhantomWorlds.instance().messages.getConfig()
-                      .getStringList("command.phantomworlds.subcommands.create.failure-folder"),
-              Arrays.asList(
-                      new MultiMessage.Placeholder("prefix", PhantomWorlds.instance().messages.getConfig()
-                              .getString("common.prefix", "&b&lPhantomWorlds: &7"), true),
-                      new MultiMessage.Placeholder("world", world.getFolder(), false),
-                      new MultiMessage.Placeholder("label", "pw", false)
-              ))).send(sender);
-      return;
-    }
-
-    if(response != LOADED) {
-
-      (new MultiMessage(
-              PhantomWorlds.instance().messages.getConfig()
-                      .getStringList("command.phantomworlds.subcommands.create.failure-loading"),
-              Arrays.asList(
-                      new MultiMessage.Placeholder("prefix", PhantomWorlds.instance().messages.getConfig()
-                              .getString("common.prefix", "&b&lPhantomWorlds: &7"), true),
-                      new MultiMessage.Placeholder("world", world.getFolder(), false),
-                      new MultiMessage.Placeholder("label", "pw", false)
-              ))).send(sender);
-      return;
-    }
-
-    (new MultiMessage(
-            PhantomWorlds.instance().messages.getConfig().getStringList(
-                    "command.phantomworlds.subcommands.load.success"),
-            Arrays.asList(
-                    new MultiMessage.Placeholder("prefix", PhantomWorlds.instance().messages.getConfig()
-                            .getString("common.prefix", "&b&lPhantomWorlds: &7"), true),
-                    new MultiMessage.Placeholder("world", world.getFolder(), false)
+        if (world == null || world.getFolder() == null) {
+            (new MultiMessage(
+                    PhantomWorlds.instance().messages.getConfig()
+                            .getStringList("command.phantomworlds.usages.load"), Arrays.asList(
+                    new MultiMessage.Placeholder("prefix",
+                            PhantomWorlds.instance().messages.getConfig().getString("common.prefix", "&b&lPhantomWorlds: &7"),
+                            true),
+                    new MultiMessage.Placeholder("label", "pw", false)
             ))).send(sender);
-  }
+            return;
+        }
+
+        Utils.loadWorld(sender, world);
+    }
 }

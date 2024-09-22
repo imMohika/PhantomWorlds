@@ -98,6 +98,10 @@ permissions:
     default: op
     description: 'Ability to run /pw load'
 
+  phantomworlds.command.phantomworlds.loadll:
+    default: op
+    description: 'Ability to run /pw loadall'
+
   phantomworlds.command.phantomworlds.setspawn:
     default: op
     description: 'Ability to run /pw setspawn'

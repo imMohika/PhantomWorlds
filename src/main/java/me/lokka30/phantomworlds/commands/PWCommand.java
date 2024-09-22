@@ -24,21 +24,7 @@ import dev.rollczi.litecommands.annotations.description.Description;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.optional.OptionalArg;
 import dev.rollczi.litecommands.annotations.permission.Permission;
-import me.lokka30.phantomworlds.commands.sub.BackupCommand;
-import me.lokka30.phantomworlds.commands.sub.CompatibilityCommand;
-import me.lokka30.phantomworlds.commands.sub.CopyCommand;
-import me.lokka30.phantomworlds.commands.sub.CreateCommand;
-import me.lokka30.phantomworlds.commands.sub.DebugCommand;
-import me.lokka30.phantomworlds.commands.sub.DeleteCommand;
-import me.lokka30.phantomworlds.commands.sub.ImportCommand;
-import me.lokka30.phantomworlds.commands.sub.InfoCommand;
-import me.lokka30.phantomworlds.commands.sub.ListCommand;
-import me.lokka30.phantomworlds.commands.sub.LoadCommand;
-import me.lokka30.phantomworlds.commands.sub.ReloadCommand;
-import me.lokka30.phantomworlds.commands.sub.SetSpawnCommand;
-import me.lokka30.phantomworlds.commands.sub.SpawnCommand;
-import me.lokka30.phantomworlds.commands.sub.TeleportCommand;
-import me.lokka30.phantomworlds.commands.sub.UnloadCommand;
+import me.lokka30.phantomworlds.commands.sub.*;
 import me.lokka30.phantomworlds.commands.sub.set.SetEffectsCommand;
 import me.lokka30.phantomworlds.commands.sub.set.SetGamemodeCommand;
 import me.lokka30.phantomworlds.commands.sub.set.SetPortalCommand;
@@ -62,143 +48,150 @@ import java.util.List;
 @Command(name = "pw", aliases = {"phantomworlds", "worlds"})
 public class PWCommand {
 
-  @Execute(name = "backup", aliases = {"archive", "bu"})
-  @Permission("phantomworlds.command.phantomworlds.backup")
-  @Description("command.phantomworlds.help.backup")
-  public void backup(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
-    BackupCommand.onCommand(commandSender, world);
-  }
+    @Execute(name = "backup", aliases = {"archive", "bu"})
+    @Permission("phantomworlds.command.phantomworlds.backup")
+    @Description("command.phantomworlds.help.backup")
+    public void backup(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
+        BackupCommand.onCommand(commandSender, world);
+    }
 
-  @Execute(name = "create", aliases = {"+", "new"})
-  @Permission("phantomworlds.command.phantomworlds.create")
-  @Description("command.phantomworlds.help.create")
-  public void create(@Context CommandSender commandSender, @Arg("world name") final String name, @Arg("environment")World.Environment environment, @Arg("world-setting") List<String> settings) {
-    CreateCommand.onCommand(commandSender, name, environment, settings);
-  }
+    @Execute(name = "create", aliases = {"+", "new"})
+    @Permission("phantomworlds.command.phantomworlds.create")
+    @Description("command.phantomworlds.help.create")
+    public void create(@Context CommandSender commandSender, @Arg("world name") final String name, @Arg("environment") World.Environment environment, @Arg("world-setting") List<String> settings) {
+        CreateCommand.onCommand(commandSender, name, environment, settings);
+    }
 
-  @Execute(name = "copy")
-  @Permission("phantomworlds.command.phantomworlds.copy")
-  @Description("command.phantomworlds.help.copy")
-  public void copy(@Context CommandSender commandSender, @Arg("world name") final String newWorld, @OptionalArg("world folder") final WorldFolder world) {
-    CopyCommand.onCommand(commandSender, newWorld, world);
-  }
+    @Execute(name = "copy")
+    @Permission("phantomworlds.command.phantomworlds.copy")
+    @Description("command.phantomworlds.help.copy")
+    public void copy(@Context CommandSender commandSender, @Arg("world name") final String newWorld, @OptionalArg("world folder") final WorldFolder world) {
+        CopyCommand.onCommand(commandSender, newWorld, world);
+    }
 
-  @Execute(name = "compatibility")
-  @Permission("phantomworlds.command.phantomworlds.compatibility")
-  @Description("command.phantomworlds.help.compatibility")
-  public void compatibility(@Context CommandSender commandSender) {
-    CompatibilityCommand.onCommand(commandSender);
-  }
+    @Execute(name = "compatibility")
+    @Permission("phantomworlds.command.phantomworlds.compatibility")
+    @Description("command.phantomworlds.help.compatibility")
+    public void compatibility(@Context CommandSender commandSender) {
+        CompatibilityCommand.onCommand(commandSender);
+    }
 
-  @Execute(name = "debug")
-  @Permission("phantomworlds.command.phantomworlds.debug")
-  @Description("command.phantomworlds.help.debug")
-  public void debug(@Context CommandSender commandSender, @OptionalArg("level") final String level) {
-    DebugCommand.onCommand(commandSender, level);
-  }
+    @Execute(name = "debug")
+    @Permission("phantomworlds.command.phantomworlds.debug")
+    @Description("command.phantomworlds.help.debug")
+    public void debug(@Context CommandSender commandSender, @OptionalArg("level") final String level) {
+        DebugCommand.onCommand(commandSender, level);
+    }
 
-  @Execute(name = "delete", aliases = {"-", "remove", "del"})
-  @Permission("phantomworlds.command.phantomworlds.delete")
-  @Description("command.phantomworlds.help.delete")
-  public void delete(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
-    DeleteCommand.onCommand(commandSender, world);
-  }
+    @Execute(name = "delete", aliases = {"-", "remove", "del"})
+    @Permission("phantomworlds.command.phantomworlds.delete")
+    @Description("command.phantomworlds.help.delete")
+    public void delete(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
+        DeleteCommand.onCommand(commandSender, world);
+    }
 
-  @Execute(name = "list", aliases = {"l"})
-  @Permission("phantomworlds.command.phantomworlds.list")
-  @Description("command.phantomworlds.help.list")
-  public void list(@Context CommandSender commandSender) {
-    ListCommand.onCommand(commandSender);
-  }
+    @Execute(name = "list", aliases = {"l"})
+    @Permission("phantomworlds.command.phantomworlds.list")
+    @Description("command.phantomworlds.help.list")
+    public void list(@Context CommandSender commandSender) {
+        ListCommand.onCommand(commandSender);
+    }
 
-  @Execute(name = "import", aliases = {"im"})
-  @Permission("phantomworlds.command.phantomworlds.import")
-  @Description("command.phantomworlds.help.import")
-  public void importCMD(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
-    ImportCommand.onCommand(commandSender, world);
-  }
+    @Execute(name = "import", aliases = {"im"})
+    @Permission("phantomworlds.command.phantomworlds.import")
+    @Description("command.phantomworlds.help.import")
+    public void importCMD(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
+        ImportCommand.onCommand(commandSender, world);
+    }
 
-  @Execute(name = "info", aliases = {"i"})
-  @Permission("phantomworlds.command.phantomworlds.info")
-  @Description("command.phantomworlds.help.info")
-  public void info(@Context CommandSender commandSender) {
-    InfoCommand.onCommand(commandSender);
-  }
+    @Execute(name = "info", aliases = {"i"})
+    @Permission("phantomworlds.command.phantomworlds.info")
+    @Description("command.phantomworlds.help.info")
+    public void info(@Context CommandSender commandSender) {
+        InfoCommand.onCommand(commandSender);
+    }
 
-  @Execute(name = "load")
-  @Permission("phantomworlds.command.phantomworlds.load")
-  @Description("command.phantomworlds.help.load")
-  public void load(@Context CommandSender commandSender, @OptionalArg("world folder") final WorldFolder world) {
-    LoadCommand.onCommand(commandSender, world);
-  }
+    @Execute(name = "load")
+    @Permission("phantomworlds.command.phantomworlds.load")
+    @Description("command.phantomworlds.help.load")
+    public void load(@Context CommandSender commandSender, @OptionalArg("world folder") final WorldFolder world) {
+        LoadCommand.onCommand(commandSender, world);
+    }
 
-  @Execute(name = "reload", aliases = {"r"})
-  @Permission("phantomworlds.command.phantomworlds.reload")
-  @Description("command.phantomworlds.help.reload")
-  public void reload(@Context CommandSender commandSender) {
-    ReloadCommand.onCommand(commandSender);
-  }
+    @Execute(name = "loadall")
+    @Permission("phantomworlds.command.phantomworlds.loadll")
+    @Description("command.phantomworlds.help.loadall")
+    public void loadAll(@Context CommandSender commandSender) {
+        LoadAllCommand.onCommand(commandSender);
+    }
 
-  @Execute(name = "set effects", aliases = {"set eff"})
-  @Permission("phantomworlds.command.phantomworlds.set.effects")
-  @Description("command.phantomworlds.help.seteffects")
-  public void setEffects(@Context CommandSender commandSender, @Arg("world") World world, @Arg("potion-effects") List<String> effects) {
-    SetEffectsCommand.onCommand(commandSender, world, effects);
-  }
+    @Execute(name = "reload", aliases = {"r"})
+    @Permission("phantomworlds.command.phantomworlds.reload")
+    @Description("command.phantomworlds.help.reload")
+    public void reload(@Context CommandSender commandSender) {
+        ReloadCommand.onCommand(commandSender);
+    }
 
-  @Execute(name = "set gamemode", aliases = {"set mode"})
-  @Permission("phantomworlds.command.phantomworlds.set.gamemode")
-  @Description("command.phantomworlds.help.setgamemode")
-  public void setGamemode(@Context CommandSender commandSender, @Arg("world") World world, @Arg("mode") GameMode mode) {
-    SetGamemodeCommand.onCommand(commandSender, world, mode);
-  }
+    @Execute(name = "set effects", aliases = {"set eff"})
+    @Permission("phantomworlds.command.phantomworlds.set.effects")
+    @Description("command.phantomworlds.help.seteffects")
+    public void setEffects(@Context CommandSender commandSender, @Arg("world") World world, @Arg("potion-effects") List<String> effects) {
+        SetEffectsCommand.onCommand(commandSender, world, effects);
+    }
 
-  @Execute(name = "set portal")
-  @Permission("phantomworlds.command.phantomworlds.set.portal")
-  @Description("command.phantomworlds.help.setportal")
-  public void setPortal(@Context CommandSender commandSender, @Arg("world") World world, @Arg("portal type") PortalType portal, @Arg("world to") World worldTo) {
-    SetPortalCommand.onCommand(commandSender, world, portal, worldTo);
-  }
+    @Execute(name = "set gamemode", aliases = {"set mode"})
+    @Permission("phantomworlds.command.phantomworlds.set.gamemode")
+    @Description("command.phantomworlds.help.setgamemode")
+    public void setGamemode(@Context CommandSender commandSender, @Arg("world") World world, @Arg("mode") GameMode mode) {
+        SetGamemodeCommand.onCommand(commandSender, world, mode);
+    }
 
-  @Execute(name = "set transfer")
-  @Permission("phantomworlds.command.phantomworlds.set.transfer")
-  @Description("command.phantomworlds.help.settransfer")
-  public void setPortal(@Context CommandSender commandSender, @Arg("world") World world, @Arg("portal type") PortalType portal, @Arg("ip:port") String ip) {
-    SetTransferCommand.onCommand(commandSender, world, portal, ip);
-  }
+    @Execute(name = "set portal")
+    @Permission("phantomworlds.command.phantomworlds.set.portal")
+    @Description("command.phantomworlds.help.setportal")
+    public void setPortal(@Context CommandSender commandSender, @Arg("world") World world, @Arg("portal type") PortalType portal, @Arg("world to") World worldTo) {
+        SetPortalCommand.onCommand(commandSender, world, portal, worldTo);
+    }
 
-  @Execute(name = "set whitelist")
-  @Permission("phantomworlds.command.phantomworlds.set.whitelist")
-  @Description("command.phantomworlds.help.setwhitelist")
-  public void setWhitelist(@Context CommandSender commandSender, @Arg("world") World world, @Arg("whitelist") boolean whitelist) {
-    SetWhitelistCommand.onCommand(commandSender, world, whitelist);
-  }
+    @Execute(name = "set transfer")
+    @Permission("phantomworlds.command.phantomworlds.set.transfer")
+    @Description("command.phantomworlds.help.settransfer")
+    public void setPortal(@Context CommandSender commandSender, @Arg("world") World world, @Arg("portal type") PortalType portal, @Arg("ip:port") String ip) {
+        SetTransferCommand.onCommand(commandSender, world, portal, ip);
+    }
 
-  @Execute(name = "setspawn", aliases = {"ss"})
-  @Permission("phantomworlds.command.phantomworlds.setspawn")
-  @Description("command.phantomworlds.help.setspawn")
-  public void setspawn(@Context CommandSender commandSender, @OptionalArg("x") Double x, @OptionalArg("y") Double y, @OptionalArg("z") Double z, @OptionalArg("world") World world, @OptionalArg("yaw") Float yaw, @OptionalArg("pitch") Float pitch) {
-    SetSpawnCommand.onCommand(commandSender, x, y, z, world, yaw, pitch);
-  }
+    @Execute(name = "set whitelist")
+    @Permission("phantomworlds.command.phantomworlds.set.whitelist")
+    @Description("command.phantomworlds.help.setwhitelist")
+    public void setWhitelist(@Context CommandSender commandSender, @Arg("world") World world, @Arg("whitelist") boolean whitelist) {
+        SetWhitelistCommand.onCommand(commandSender, world, whitelist);
+    }
 
-  @Execute(name = "spawn")
-  @Permission("phantomworlds.command.phantomworlds.spawn")
-  @Description("command.phantomworlds.help.spawn")
-  public void spawn(@Context CommandSender commandSender, @OptionalArg("world") final World world, @OptionalArg("target") final Player player) {
-    SpawnCommand.onCommand(commandSender, world, player);
-  }
+    @Execute(name = "setspawn", aliases = {"ss"})
+    @Permission("phantomworlds.command.phantomworlds.setspawn")
+    @Description("command.phantomworlds.help.setspawn")
+    public void setspawn(@Context CommandSender commandSender, @OptionalArg("x") Double x, @OptionalArg("y") Double y, @OptionalArg("z") Double z, @OptionalArg("world") World world, @OptionalArg("yaw") Float yaw, @OptionalArg("pitch") Float pitch) {
+        SetSpawnCommand.onCommand(commandSender, x, y, z, world, yaw, pitch);
+    }
 
-  @Execute(name = "teleport", aliases = {"tp"})
-  @Permission("phantomworlds.command.phantomworlds.teleport")
-  @Description("command.phantomworlds.help.tp")
-  public void tp(@Context CommandSender commandSender, @OptionalArg("world") final World world, @OptionalArg("target") final Player player) {
-    TeleportCommand.onCommand(commandSender, world, player);
-  }
+    @Execute(name = "spawn")
+    @Permission("phantomworlds.command.phantomworlds.spawn")
+    @Description("command.phantomworlds.help.spawn")
+    public void spawn(@Context CommandSender commandSender, @OptionalArg("world") final World world, @OptionalArg("target") final Player player) {
+        SpawnCommand.onCommand(commandSender, world, player);
+    }
 
-  @Execute(name = "unload", aliases = {"u"})
-  @Permission("phantomworlds.command.phantomworlds.unload")
-  @Description("command.phantomworlds.help.unload")
-  public void unload(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
-    UnloadCommand.onCommand(commandSender, world);
-  }
+    @Execute(name = "teleport", aliases = {"tp"})
+    @Permission("phantomworlds.command.phantomworlds.teleport")
+    @Description("command.phantomworlds.help.tp")
+    public void tp(@Context CommandSender commandSender, @OptionalArg("world") final World world, @OptionalArg("target") final Player player) {
+        TeleportCommand.onCommand(commandSender, world, player);
+    }
+
+    @Execute(name = "unload", aliases = {"u"})
+    @Permission("phantomworlds.command.phantomworlds.unload")
+    @Description("command.phantomworlds.help.unload")
+    public void unload(@Context CommandSender commandSender, @OptionalArg("world") final World world) {
+        UnloadCommand.onCommand(commandSender, world);
+    }
 }
